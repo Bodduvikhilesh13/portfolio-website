@@ -388,10 +388,13 @@ async function startServer() {
   } else {
     // Production static serving
     const distPath = path.resolve(__dirname);
-    app.use(express.static(distPath));
-    app.get("*", (req, res) => {
-    res.sendFile(path.join(distPath, "index.html"));
-    });
+    app.use(
+  "/assets",
+  express.static(path.join(distPath, "assets"))
+);
+app.get("*", (req, res) => {
+  res.sendFile(path.join(distPath, "index.html"));
+});
     console.log("Production static build serving initialized.");
   }
 
